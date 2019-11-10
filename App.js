@@ -1,9 +1,10 @@
 import React from "react";
 import { AppLoading } from "expo";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Container, Text } from "native-base";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-import HomeScreen  from "./screens/home-screen/HomeScreen";
+import AppNavigator from "./navigation/AppNavigator";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -28,7 +29,17 @@ export default class App extends React.Component {
     }
 
     return (
-      <HomeScreen />
+      <View style={styles.container}>
+        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+        <AppNavigator />
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff"
+  }
+});

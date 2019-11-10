@@ -6,7 +6,8 @@ import {
 } from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen.js";
+import ChatbotScreen from "../screens/chatbot-screen/chatbotScreen";
+import HomeScreen from "../screens/home-screen/HomeScreen";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -36,8 +37,28 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = "";
 
+const ChatbotStack = createStackNavigator(
+  {
+    Chatbot: ChatbotScreen
+  },
+  config
+);
+
+ChatbotStack.navigationOptions = {
+  tabBarLabel: "Chatbot",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-mic" : "md-mic"}
+    />
+  )
+};
+
+ChatbotStack.path = "";
+
 const tabNavigator = createBottomTabNavigator({
-  HomeStack
+  HomeStack,
+  ChatbotStack
 });
 
 tabNavigator.path = "";
