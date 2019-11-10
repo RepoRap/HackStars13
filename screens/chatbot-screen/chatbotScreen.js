@@ -2,8 +2,9 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 import { DirectLine } from "botframework-directlinejs";
+
 const directLine = new DirectLine({
-  secret: "YOUR_SECRET_GOES_HERE"
+  secret: "1n--QIkjRrw.P67gAhLCVv7YXeY8T_cWmmsxpBDwPTNedGYCTrNBSTQ"
 });
 const botMessageToGiftedMessage = botMessage => ({
   ...botMessage,
@@ -25,7 +26,9 @@ function giftedMessageToBotMessage(message) {
 }
 export default class App extends React.Component {
   state = {
-    messages: []
+    messages: [],
+    userData: null,
+    session: null
   };
   constructor(props) {
     super(props);
@@ -34,6 +37,17 @@ export default class App extends React.Component {
       this.setState({ messages: [newMessage, ...this.state.messages] });
     });
   }
+  componentWillMount() {
+    getUserData = async () => {
+      try {
+      } catch (e) {
+        throw new Error();
+      }
+
+      console.log("Done.");
+    };
+  }
+
   onSend = messages => {
     this.setState({ messages: [...messages, ...this.state.messages] });
     messages.forEach(message => {
@@ -47,7 +61,8 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <GiftedChat
           user={{
-            _id: 1
+            id: 1,
+            name: "ahmed"
           }}
           messages={this.state.messages}
           onSend={this.onSend}

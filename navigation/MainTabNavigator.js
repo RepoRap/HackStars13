@@ -8,6 +8,7 @@ import {
 import TabBarIcon from "../components/TabBarIcon";
 import ChatbotScreen from "../screens/chatbot-screen/chatbotScreen";
 import HomeScreen from "../screens/home-screen/HomeScreen";
+import CardScreen from "../screens/cards-screen";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -28,8 +29,8 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
+          ? `ios-home${focused ? "" : "-outline"}`
+          : "md-home"
       }
     />
   )
@@ -55,10 +56,29 @@ ChatbotStack.navigationOptions = {
 };
 
 ChatbotStack.path = "";
+const CardStack = createStackNavigator(
+  {
+    CardScreen: CardScreen
+  },
+  config
+);
+
+CardStack.navigationOptions = {
+  tabBarLabel: "cardScreen",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-mic" : "md-mic"}
+    />
+  )
+};
+
+CardStack.path = "";
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  ChatbotStack
+  ChatbotStack,
+  CardStack
 });
 
 tabNavigator.path = "";

@@ -22,7 +22,14 @@ import {
 } from "native-base";
 import UpcomingTrips from "./components/UpcomingTrips";
 import DateInput from "../../components/dateInput";
+import LocationPicker from "../../components/locationpicker";
+import { loadAsync } from "expo-font";
 
+const locations = [
+  { name: "Mogadishu", stayDuration: "5" },
+  { name: "Ibiza", stayDuration: "10" },
+  { name: "Bali", stayDuration: "20" }
+];
 const HomeScreen = () => {
   return (
     <Container>
@@ -33,7 +40,14 @@ const HomeScreen = () => {
         </Body>
         <Right />
       </Header>
-      <Content style={{ marginLeft: 10 }}>
+      <Content
+        style={{
+          marginLeft: 10,
+          flex: 1,
+          display: "flex"
+        }}
+        ScrollView
+      >
         <View style={styles.avatar}>
           <Thumbnail
             large
@@ -86,8 +100,17 @@ const HomeScreen = () => {
             dates="10/12/2012 - 15/10/2012"
           />
         </ScrollView>
+        <DateInput />
+        <ScrollView>
+          <LocationPicker
+            style={{
+              alignSelf: "center",
+              paddingVertical: 30
+            }}
+            locations={locations}
+          />
+        </ScrollView>
       </Content>
-      <DateInput />
     </Container>
   );
 };

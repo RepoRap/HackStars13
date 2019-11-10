@@ -5,6 +5,7 @@ import { Container, Text } from "native-base";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import AppNavigator from "./navigation/AppNavigator";
+import axois from "axios";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -20,6 +21,14 @@ export default class App extends React.Component {
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       ...Ionicons.font
     });
+    // Gets user data from DB and stores it in the Async Storage
+    storeUserData = async () => {
+      let userData = await axois.get(); // fetches data from DB
+      try {
+      } catch (e) {
+        throw new Error();
+      }
+    };
     this.setState({ isReady: true });
   }
 
